@@ -1,8 +1,59 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Ana Sayfa";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mt-5">
+    <h1 class="display-3 fw-bold text-primary">SAÜ FITNESS CENTER</h1>
+    <p class="lead text-muted mt-3">
+        Daha sağlıklı, daha güçlü ve daha fit bir yaşama adım atın.
+        Uzman antrenörlerimiz ve kişiye özel programlarımızla hedeflerinize ulaşın.
+    </p>
+
+    <div class="mt-5">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                <a class="btn btn-primary btn-lg px-4 gap-3" asp-area="Identity" asp-page="/Account/Login">Üye Girişi</a>
+
+                <a class="btn btn-outline-danger btn-lg px-4"
+                   asp-area="Identity"
+                   asp-page="/Account/Login"
+                   asp-route-ReturnUrl="/Admin/Index">Yönetici Girişi</a>
+
+                <a class="btn btn-link mt-2" asp-area="Identity" asp-page="/Account/Register">Kayıt Ol</a>
+            </div>
+        }
+        else
+        {
+            // ... Giriş yapmışsa gösterilecek kısım (Aynı kalabilir) ...
+            // Ama buraya Admin ise "Yönetici Paneline Git" butonu ekleyelim:
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a class="btn btn-danger btn-lg" asp-controller="Admin" asp-action="Index">Yönetici Paneline Git 🚀</a>
+            }
+        }
+    </div>
+
+    <div class="mt-5">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+             class="img-fluid rounded shadow-lg"
+             style="max-height: 400px; width: 100%; object-fit: cover;"
+             alt="Fitness Salonu Resmi">
+    </div>
+
+    <div class="row mt-5 pt-4">
+        <div class="col-md-4">
+            <h3>💪 Uzman Eğitmenler</h3>
+            <p>Alanında sertifikalı profesyonel antrenörlerle çalışın.</p>
+        </div>
+        <div class="col-md-4">
+            <h3>🧘‍♀️ Çeşitli Hizmetler</h3>
+            <p>Pilates, Yoga, Cardio ve Vücut Geliştirme seçenekleri.</p>
+        </div>
+        <div class="col-md-4">
+            <h3>📅 Kolay Randevu</h3>
+            <p>İstediğiniz saatte, istediğiniz hocadan tek tıkla randevu alın.</p>
+        </div>
+    </div>
 </div>

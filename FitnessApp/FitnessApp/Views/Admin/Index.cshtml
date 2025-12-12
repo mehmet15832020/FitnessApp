@@ -1,0 +1,77 @@
+﻿@model IEnumerable<FitnessApp.Web.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Yönetici Paneli";
+}
+
+<div class="container mt-4">
+    <h1 class="text-danger mb-4">🚀 Yönetici Paneli</h1>
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Toplam Üye</h5>
+                    <p class="card-text display-4">@ViewBag.ToplamUye</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Toplam Antrenör</h5>
+                    <p class="card-text display-4">@ViewBag.ToplamAntrenor</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Toplam Randevu</h5>
+                    <p class="card-text display-4">@ViewBag.ToplamRandevu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <a asp-controller="Trainers" asp-action="Index" class="btn btn-outline-dark">Antrenörleri Yönet</a>
+        <a asp-controller="Services" asp-action="Index" class="btn btn-outline-dark">Hizmetleri Yönet</a>
+        <a asp-controller="Appointments" asp-action="Index" class="btn btn-outline-dark">Tüm Randevu Geçmişi</a>
+    </div>
+
+    <h3 class="mt-5">⏳ Onay Bekleyen Randevular</h3>
+    @if (Model.Any())
+    {
+        <table class="table table-hover shadow-sm">
+            <thead class="table-light">
+                <tr>
+                    <th>Tarih/Saat</th>
+                    <th>Üye</th>
+                    <th>Antrenör</th>
+                    <th>Hizmet</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Tarih.ToShortDateString() - @item.Saat</td>
+                        <td>@item.AppUser.AdSoyad</td>
+                        <td>@item.Trainer.AdSoyad</td>
+                        <td>@item.Service.Isim</td>
+                        <td>
+                            <a asp-action="Onayla" asp-route-id="@item.Id" class="btn btn-success btn-sm">✅ Onayla</a>
+                            <a asp-action="Iptal" asp-route-id="@item.Id" class="btn btn-danger btn-sm">❌ Reddet</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">Şu an onay bekleyen yeni randevu yok.</div>
+    }
+</div>

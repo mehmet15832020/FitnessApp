@@ -1,0 +1,141 @@
+﻿@model FitnessApp.Web.Models.Appointment
+
+@{
+    ViewData["Title"] = "Randevu Al";
+}
+
+@if (TempData["Hata"] != null)
+{
+    <div class="alert alert-danger">
+        ⚠️ <strong>Bir sorun oluştu:</strong> @TempData["Hata"]
+    </div>
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">📅 Yeni Randevu Oluştur</h3>
+                </div>
+                <div class="card-body p-4">
+
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-floating mb-3">
+                            <select asp-for="ServiceId" class="form-select" asp-items="ViewBag.ServiceId"></select>
+                            <label asp-for="ServiceId">Hizmet Seçiniz</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select asp-for="TrainerId" class="form-select" asp-items="ViewBag.TrainerId" id="trainerSelect">
+                                <option value="">Önce Antrenör Seçin</option>
+                            </select>
+                            <label asp-for="TrainerId">Antrenör Seçiniz</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Tarih" type="date" class="form-control" id="dateSelect"
+                                   min="@DateTime.Now.ToString("yyyy-MM-dd")" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                            <label asp-for="Tarih">Tarih Seçiniz</label>
+                            <span asp-validation-for="Tarih" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Müsait Saatler:</label>
+                            <div id="saatContainer" class="d-flex flex-wrap gap-2">
+                                <div class="alert alert-secondary w-100">
+                                    Lütfen önce Antrenör ve Tarih seçiniz...
+                                </div>
+                            </div>
+
+                            <input type="hidden" asp-for="Saat" id="selectedSaat" required />
+                            <span asp-validation-for="Saat" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Randevuyu Tamamla ✅</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a asp-action="Index" class="text-muted">Listeye Geri Dön</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            // Hoca veya Tarih değişirse saatleri getir
+            $('#trainerSelect, #dateSelect').change(function () {
+                var trainerId = $('#trainerSelect').val();
+                var date = $('#dateSelect').val();
+
+                // Eğer ikisi de seçiliyse sorgu at
+                if (trainerId && date) {
+                    GetSaatler(trainerId, date);
+                }
+            });
+
+            // İlk açılışta eğer değerler doluysa (örn: hatadan döndüyse) çalıştır
+            if ($('#trainerSelect').val() && $('#dateSelect').val()) {
+                GetSaatler($('#trainerSelect').val(), $('#dateSelect').val());
+            }
+
+            function GetSaatler(trainerId, date) {
+                $('#saatContainer').html('<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Yükleniyor...</span></div>');
+
+                $.ajax({
+                    url: '/Appointments/GetMusaitSaatler',
+                    type: 'GET',
+                    data: { trainerId: trainerId, date: date },
+                    success: function (data) {
+                        $('#saatContainer').empty();
+
+                        // Gelen her saat için buton oluştur
+                        $.each(data, function (index, item) {
+                            var btnClass = item.doluMu ? 'btn-outline-danger disabled' : 'btn-outline-success';
+                            var icon = item.doluMu ? '❌' : '🟩';
+                            var disabledAttr = item.doluMu ? 'disabled' : '';
+
+                            var btnHtml = `<button type="button"
+                                            class="btn ${btnClass} saat-btn"
+                                            data-saat="${item.saat}" ${disabledAttr}
+                                            style="min-width: 100px;">
+                                            ${item.saat} <br> <small>${item.doluMu ? 'Dolu' : 'Müsait'}</small>
+                                           </button>`;
+
+                            $('#saatContainer').append(btnHtml);
+                        });
+
+                               // Saat butonuna tıklama olayı
+        $('.saat-btn').click(function () {
+            // Görsel değişim
+            $('.saat-btn').removeClass('btn-success text-white').addClass('btn-outline-success');
+            $(this).removeClass('btn-outline-success').addClass('btn-success text-white');
+
+            // DEĞERİ INPUTA YAZ
+            var secilenSaat = $(this).data('saat');
+            $('#selectedSaat').val(secilenSaat);
+
+            // Konsola veya ekrana yazdırarak test edelim (Geliştirme aşamasında)
+            console.log("Seçilen Saat: " + secilenSaat);
+        });
+                    },
+                    error: function () {
+                        $('#saatContainer').html('<div class="alert alert-danger">Saatler yüklenirken hata oluştu.</div>');
+                    }
+                });
+            }
+        });
+    </script>
+}

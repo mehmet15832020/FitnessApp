@@ -27,5 +27,7 @@ namespace FitnessApp.Web.Models
         public Service Service { get; set; }
 
         public DateTime OlusturulmaTarihi { get; set; } = DateTime.Now;
+
+        public string Durum { get; set; } = "Onay Bekliyor";
     }
 }

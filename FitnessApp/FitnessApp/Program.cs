@@ -39,6 +39,8 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 // 3. MVC ve Razor Sayfaları
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+// Yapay Zeka Servisi (Gemini)
+builder.Services.AddScoped<FitnessApp.Web.Services.GeminiService>();
 
 var app = builder.Build();
 

@@ -1,0 +1,129 @@
+﻿@{
+    ViewData["Title"] = "Antrenör Raporları";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">📊 Antrenör Listesi (API Destekli)</h3>
+            <span class="badge bg-success">Canlı Veri</span>
+        </div>
+        <div class="card-body">
+
+            <p class="text-muted">
+                Aşağıdaki veriler, yazdığımız <strong>REST API</strong> üzerinden çekilmektedir.
+                Sayfa yenilenmeden filtreleme yapılabilir.
+            </p>
+
+            <div class="input-group mb-4">
+                <input type="text" id="txtUzmanlik" class="form-control" placeholder="Uzmanlık alanı girin (Örn: Yoga, Fitness)...">
+                <button class="btn btn-primary" type="button" id="btnFiltrele">🔍 API ile Filtrele</button>
+                <button class="btn btn-secondary" type="button" id="btnSifirla">Listeyi Sıfırla</button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Fotoğraf</th>
+                            <th>Ad Soyad</th>
+                            <th>Uzmanlık Alanı</th>
+                        </tr>
+                    </thead>
+                    <tbody id="apiTableBody">
+                        <tr>
+                            <td colspan="4" class="text-center">Veriler Yükleniyor...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="hataKutusu" class="alert alert-danger d-none"></div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Sayfa açılınca tüm listeyi çek
+            LoadTrainers();
+
+            // Filtrele butonuna basınca
+            $("#btnFiltrele").click(function () {
+                var uzmanlik = $("#txtUzmanlik").val();
+                if (uzmanlik) {
+                    LoadTrainersBySpecialty(uzmanlik);
+                } else {
+                    LoadTrainers(); // Boşsa hepsini getir
+                }
+            });
+
+            // Sıfırla butonu
+            $("#btnSifirla").click(function () {
+                $("#txtUzmanlik").val("");
+                LoadTrainers();
+            });
+
+            // 1. TÜMÜNÜ GETİREN FONKSİYON
+            function LoadTrainers() {
+                $("#apiTableBody").html('<tr><td colspan="4" class="text-center"><div class="spinner-border text-primary"></div> Veriler API\'den çekiliyor...</td></tr>');
+
+                $.ajax({
+                    url: '/api/FitnessApi/Trainers', // API Adresimiz
+                    type: 'GET',
+                    success: function (data) {
+                        TabloyuDoldur(data);
+                    },
+                    error: function (err) {
+                        ShowError("Veri çekilemedi! API çalışmıyor olabilir.");
+                    }
+                });
+            }
+
+            // 2. FİLTRELİ GETİREN FONKSİYON
+            function LoadTrainersBySpecialty(uzmanlik) {
+                $("#apiTableBody").html('<tr><td colspan="4" class="text-center"><div class="spinner-border text-warning"></div> Filtreleniyor...</td></tr>');
+
+                $.ajax({
+                    url: '/api/FitnessApi/Trainers/' + uzmanlik, // API Adresimiz (Parametreli)
+                    type: 'GET',
+                    success: function (data) {
+                        TabloyuDoldur(data);
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 404) {
+                            $("#apiTableBody").html('<tr><td colspan="4" class="text-center text-danger fw-bold">Bu uzmanlık alanında hoca bulunamadı.</td></tr>');
+                        } else {
+                            ShowError("Filtreleme hatası!");
+                        }
+                    }
+                });
+            }
+
+            // TABLOYU ÇİZEN YARDIMCI FONKSİYON
+            function TabloyuDoldur(data) {
+                var html = '';
+                $.each(data, function (index, item) {
+                    // Resim yoksa varsayılan resim koyalım
+                    var imgUrl = item.resimUrl ? item.resimUrl : 'https://via.placeholder.com/50';
+
+                    html += `<tr>
+                                <td>${item.id}</td>
+                                <td><img src="${imgUrl}" width="50" class="rounded-circle" /></td>
+                                <td class="fw-bold">${item.adSoyad}</td>
+                                <td><span class="badge bg-info text-dark">${item.uzmanlikAlani}</span></td>
+                             </tr>`;
+                });
+                $("#apiTableBody").html(html);
+                $("#hataKutusu").addClass("d-none");
+            }
+
+            function ShowError(message) {
+                $("#hataKutusu").text(message).removeClass("d-none");
+            }
+        });
+    </script>
+}

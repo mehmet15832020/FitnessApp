@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "AI Fitness Koçu";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card shadow-lg">
+                <div class="card-header bg-warning text-dark">
+                    <h3 class="mb-0">🤖 AI Koçuna Danış</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label>Yaşınız</label>
+                            <input type="number" name="yas" class="form-control" required placeholder="Örn: 22">
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Kilo (kg)</label>
+                                <input type="number" name="kilo" class="form-control" required placeholder="Örn: 75">
+                            </div>
+                            <div class="col">
+                                <label>Boy (cm)</label>
+                                <input type="number" name="boy" class="form-control" required placeholder="Örn: 180">
+                            </div>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label>Cinsiyet</label>
+                            <select name="cinsiyet" class="form-select">
+                                <option value="Erkek">Erkek</option>
+                                <option value="Kadın">Kadın</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Hedefiniz Nedir?</label>
+                            <select name="hedef" class="form-select">
+                                <option value="Kilo Vermek">Kilo Vermek (Yağ Yakımı)</option>
+                                <option value="Kas Yapmak">Kas Yapmak (Hacim Kazanma)</option>
+                                <option value="Formu Korumak">Formu Korumak</option>
+                                <option value="Kondisyon Artırmak">Kondisyon Artırmak</option>
+                            </select>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-dark btn-lg">
+                                ✨ Program Oluştur
+                            </button>
+                        </div>
+                    </form>
+
+                    @if (ViewBag.Hata != null)
+                    {
+                        <div class="alert alert-danger mt-3">@ViewBag.Hata</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            @if (ViewBag.Sonuc != null)
+            {
+                <div class="card shadow border-success">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0">📋 Senin İçin Hazırlanan Plan</h4>
+                    </div>
+                    <div class="card-body">
+                        @Html.Raw(ViewBag.Sonuc)
+                    </div>
+                    <div class="card-footer text-muted">
+                        <small>* Bu öneriler Google Gemini AI tarafından oluşturulmuştur. Lütfen uygulamadan önce doktorunuza danışınız.</small>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info mt-5">
+                    <h4>Nasıl Çalışır?</h4>
+                    <p>Yandaki formu doldurup gönderdiğinizde, yapay zeka sizin vücut ölçülerinize ve hedeflerinize göre <strong>kişiye özel</strong> bir beslenme ve antrenman taslağı hazırlar.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

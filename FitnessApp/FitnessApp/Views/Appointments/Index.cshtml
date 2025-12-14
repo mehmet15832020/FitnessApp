@@ -1,81 +1,104 @@
 ﻿@model IEnumerable<FitnessApp.Web.Models.Appointment>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Randevularım";
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold display-6">📅 Randevu Listesi</h2>
+            <p class="text-muted">Geçmiş ve gelecek tüm antrenman randevularınız.</p>
+        </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
-@if (TempData["Basarili"] != null)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Harika!</strong> @TempData["Basarili"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <a asp-action="Create" class="btn btn-primary btn-lg shadow-sm">
+            <i class="bi bi-plus-lg"></i> + Yeni Randevu Al
+        </a>
     </div>
-}
 
-<h1>Randevular</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Müşteri / Üye
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tarih)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Saat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AppUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Trainer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Service)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OlusturulmaTarihi)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-               @Html.DisplayFor(modelItem => item.AppUser.AdSoyad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tarih)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Saat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppUser.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Trainer.AdSoyad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Service.Isim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OlusturulmaTarihi)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    @if (TempData["Basarili"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+            <strong>Harika!</strong> @TempData["Basarili"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-dark text-white">
+                    <tr style="height: 50px;">
+                        <th class="ps-4">Müşteri / Üye</th>
+                        <th>Tarih</th>
+                        <th>Saat</th>
+                        <th>Antrenör</th>
+                        <th>Hizmet</th>
+                        <th>Durum</th>
+                        <th>Oluşturulma</th>
+                        <th class="text-end pe-4">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="ps-4 fw-bold">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center me-2"
+                                         style="width: 40px; height: 40px; color: #333; font-weight: bold;">
+                                        @(item.AppUser?.AdSoyad?.Substring(0, 1) ?? "?")
+                                    </div>
+                                    @Html.DisplayFor(modelItem => item.AppUser.AdSoyad)
+                                </div>
+                            </td>
+                            <td>
+                                @item.Tarih.ToString("dd MMMM yyyy")
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border">@Html.DisplayFor(modelItem => item.Saat)</span>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Trainer.AdSoyad)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Service.Isim)</td>
+
+                            <td>
+                                @if (item.Durum == "Onaylandı")
+                                {
+                                    <span class="badge bg-success rounded-pill">Onaylandı</span>
+                                }
+                                else if (item.Durum == "Onay Bekliyor")
+                                {
+                                    <span class="badge bg-warning text-dark rounded-pill">Onay Bekliyor</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary rounded-pill">@item.Durum</span>
+                                }
+                            </td>
+                            <th>Hizmet Detayı</th>
+
+                            <td>
+                                <strong>@item.Service.Isim</strong><br />
+                                <small class="text-muted">
+                                    ⏱️ @item.Service.Sure dk | 💰 @item.Service.Ucret ₺
+                                </small>
+                            </td>
+
+                            <td class="text-muted small">
+                                @item.OlusturulmaTarihi.ToString("dd.MM.yyyy HH:mm")
+                            </td>
+
+                            <td class="text-end pe-4">
+                                <div class="btn-group">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Düzenle">✏️</a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" title="Detay">ℹ️</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Sil">🗑️</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

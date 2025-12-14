@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FitnessApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.2/lux/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FitnessApp.styles.css" asp-append-version="true" />
 </head>
@@ -21,10 +21,17 @@
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            // 1. HERKESİN (ÜYE + ADMİN) GÖRECEĞİ MENÜLER
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">Randevular</a>
-                            </li>
+                            // 1. SADECE ÜYELERİN (MEMBER) GÖRECEĞİ MENÜLER
+                            // Veritabanındaki rol adı "Member" olduğu için burayı düzelttik
+                            @if (User.IsInRole("Member"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">Randevular</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Ai" asp-action="Index">✨ AI Koç</a>
+                                </li>
+                            }
 
                             // 2. SADECE ADMİNİN GÖRECEĞİ MENÜLER
                             @if (User.IsInRole("Admin"))
@@ -39,13 +46,12 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">Hizmet Yönetimi</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Reports" asp-action="Index">📊 API Raporları</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Reports" asp-action="Index">📊 Antrenör Raporları</a>
                                 </li>
                             }
                         }
                     </ul>
                     <partial name="_LoginPartial" />
-                    
                 </div>
             </div>
         </nav>
@@ -58,12 +64,46 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - FitnessApp 
+            &copy; 2025 - FitnessApp
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        // Başarılı Mesajı Varsa
+        @if (TempData["Basarili"] != null)
+        {
+                <text>
+                Swal.fire({
+                    title: 'Harika!',
+                    text: '@Html.Raw(TempData["Basarili"])',
+                    icon: 'success',
+                    confirmButtonText: 'Tamam',
+                    confirmButtonColor: '#1a1a1a'
+                });
+                </text>
+        }
+
+        // Hata Mesajı Varsa
+        @if (TempData["Hata"] != null)
+        {
+                <text>
+                Swal.fire({
+                    title: 'Dikkat!',
+                    text: '@Html.Raw(TempData["Hata"])',
+                    icon: 'error',
+                    confirmButtonText: 'Anladım',
+                    confirmButtonColor: '#d9534f'
+                });
+                </text>
+        }
+    </script>
 </body>
 </html>

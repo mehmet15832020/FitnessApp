@@ -55,11 +55,9 @@ namespace FitnessApp.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            // --- BURASI EKLENDİ: AD SOYAD ALANI ---
             [Required]
             [Display(Name = "Ad Soyad")]
             public string AdSoyad { get; set; }
-            // -------------------------------------
 
             [Required]
             [EmailAddress]
@@ -92,9 +90,7 @@ namespace FitnessApp.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                // --- BURASI EKLENDİ: AD SOYAD VERİTABANINA AKTARILIYOR ---
                 user.AdSoyad = Input.AdSoyad;
-                // ---------------------------------------------------------
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -103,6 +99,11 @@ namespace FitnessApp.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    // --- İŞTE EKSİK OLAN SİHİRLİ SATIR BURASI! ---
+                    // Yeni kayıt olan herkese otomatik 'Member' rolünü veriyoruz.
+                    await _userManager.AddToRoleAsync(user, "Member");
+                    // ----------------------------------------------
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -132,7 +133,6 @@ namespace FitnessApp.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
 

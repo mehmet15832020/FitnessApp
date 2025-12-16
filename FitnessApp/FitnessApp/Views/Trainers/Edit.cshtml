@@ -15,7 +15,13 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="AdSoyad" class="control-label"></label>
-                <input asp-for="AdSoyad" class="form-control" />
+                <div class="form-floating mb-3">
+                    <select asp-for="UzmanlikAlani" class="form-select" asp-items="ViewBag.Hizmetler">
+                        <option value="">-- Bir Uzmanlık Seçiniz --</option>
+                    </select>
+                    <label asp-for="UzmanlikAlani">Uzmanlık Alanı (Hizmet)</label>
+                    <span asp-validation-for="UzmanlikAlani" class="text-danger"></span>
+                </div>
                 <span asp-validation-for="AdSoyad" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -75,21 +75,65 @@
 
     <script>
         $(document).ready(function () {
-            // Hoca veya Tarih değişirse saatleri getir
-            $('#trainerSelect, #dateSelect').change(function () {
-                var trainerId = $('#trainerSelect').val();
-                var date = $('#dateSelect').val();
 
-                // Eğer ikisi de seçiliyse sorgu at
+            // Başlangıçta Antrenör ve Tarih kısımlarını pasif yapalım
+            $('#trainerSelect').prop('disabled', true);
+            $('#dateSelect').prop('disabled', true);
+
+            // 1. HİZMET SEÇİLİNCE -> UYGUN HOCALARI GETİR
+            $('#ServiceId').change(function () {
+                var serviceId = $(this).val();
+
+                // Temizlik: Hoca listesini boşalt ve varsayılanı ekle
+                $('#trainerSelect').empty().append('<option value="">Önce Antrenör Seçin</option>');
+                $('#trainerSelect').prop('disabled', true);
+                $('#dateSelect').prop('disabled', true);
+                $('#saatContainer').empty().append('<div class="alert alert-secondary w-100">Lütfen önce Hizmet, sonra Antrenör ve Tarih seçiniz...</div>');
+
+                if (serviceId) {
+                    $.ajax({
+                        url: '/Appointments/GetTrainersByService',
+                        type: 'GET',
+                        data: { serviceId: serviceId },
+                        success: function (data) {
+                            // Gelen hocaları listeye ekle
+                            $.each(data, function (index, item) {
+                                $('#trainerSelect').append(`<option value="${item.id}">${item.adSoyad} (${item.uzmanlik})</option>`);
+                            });
+
+                            // Eğer hoca varsa kilidi aç
+                            if (data.length > 0) {
+                                $('#trainerSelect').prop('disabled', false);
+                            } else {
+                                $('#trainerSelect').append('<option value="">Bu alanda uygun hoca bulunamadı</option>');
+                            }
+                        }
+                    });
+                }
+            });
+
+            // 2. HOCA SEÇİLİNCE -> TARİHİ AKTİF ET
+            $('#trainerSelect').change(function() {
+                if ($(this).val()) {
+                    $('#dateSelect').prop('disabled', false);
+                    // Eğer tarih zaten seçiliyse saatleri de güncelle
+                    if ($('#dateSelect').val()) {
+                        GetSaatler($(this).val(), $('#dateSelect').val());
+                    }
+                } else {
+                    $('#dateSelect').prop('disabled', true);
+                }
+            });
+
+            // 3. TARİH DEĞİŞİNCE -> SAATLERİ GETİR
+            $('#dateSelect').change(function () {
+                var trainerId = $('#trainerSelect').val();
+                var date = $(this).val();
+
                 if (trainerId && date) {
                     GetSaatler(trainerId, date);
                 }
             });
-
-            // İlk açılışta eğer değerler doluysa (örn: hatadan döndüyse) çalıştır
-            if ($('#trainerSelect').val() && $('#dateSelect').val()) {
-                GetSaatler($('#trainerSelect').val(), $('#dateSelect').val());
-            }
 
             function GetSaatler(trainerId, date) {
                 $('#saatContainer').html('<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Yükleniyor...</span></div>');
@@ -101,7 +145,6 @@
                     success: function (data) {
                         $('#saatContainer').empty();
 
-                        // Gelen her saat için buton oluştur
                         $.each(data, function (index, item) {
                             var btnClass = item.doluMu ? 'btn-outline-danger disabled' : 'btn-outline-success';
                             var icon = item.doluMu ? '❌' : '🟩';
@@ -117,22 +160,11 @@
                             $('#saatContainer').append(btnHtml);
                         });
 
-                               // Saat butonuna tıklama olayı
-        $('.saat-btn').click(function () {
-            // Görsel değişim
-            $('.saat-btn').removeClass('btn-success text-white').addClass('btn-outline-success');
-            $(this).removeClass('btn-outline-success').addClass('btn-success text-white');
-
-            // DEĞERİ INPUTA YAZ
-            var secilenSaat = $(this).data('saat');
-            $('#selectedSaat').val(secilenSaat);
-
-            // Konsola veya ekrana yazdırarak test edelim (Geliştirme aşamasında)
-            console.log("Seçilen Saat: " + secilenSaat);
-        });
-                    },
-                    error: function () {
-                        $('#saatContainer').html('<div class="alert alert-danger">Saatler yüklenirken hata oluştu.</div>');
+                        $('.saat-btn').click(function () {
+                            $('.saat-btn').removeClass('btn-success text-white').addClass('btn-outline-success');
+                            $(this).removeClass('btn-outline-success').addClass('btn-success text-white');
+                            $('#selectedSaat').val($(this).data('saat'));
+                        });
                     }
                 });
             }

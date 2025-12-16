@@ -256,7 +256,27 @@ namespace FitnessApp.Controllers
         {
             return _context.Appointments.Any(e => e.Id == id);
         }
+        // --- AJAX API: Hizmete Göre Antrenör Getir ---
+        [HttpGet]
+        public async Task<JsonResult> GetTrainersByService(int serviceId)
+        {
+            // 1. Seçilen hizmetin adını bul (Örn: Yoga)
+            var service = await _context.Services.FindAsync(serviceId);
+            if (service == null) return Json(null);
 
+            // 2. Uzmanlık alanında bu hizmetin adı geçen hocaları bul
+            // (Örn: Hoca "Yoga, Pilates" biliyorsa listeye gelir)
+            var trainers = await _context.Trainers
+                .Where(t => t.UzmanlikAlani.Contains(service.Isim))
+                .Select(t => new {
+                    id = t.Id,
+                    adSoyad = t.AdSoyad,
+                    uzmanlik = t.UzmanlikAlani
+                })
+                .ToListAsync();
+
+            return Json(trainers);
+        }
         // --- AJAX İÇİN API ---
         [HttpGet]
         public JsonResult GetMusaitSaatler(int trainerId, DateTime date)

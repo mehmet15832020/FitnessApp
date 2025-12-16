@@ -46,8 +46,12 @@ namespace FitnessApp.Controllers
         }
 
         // GET: Trainers/Create
+        // GET: Trainers/Create
         public IActionResult Create()
         {
+            // Veritabanındaki Hizmetlerin İsimlerini Dropdown için hazırlıyoruz
+            // Value = "Isim", Text = "Isim" (Çünkü veritabanında string olarak tutuyoruz)
+            ViewData["Hizmetler"] = new SelectList(_context.Services, "Isim", "Isim");
             return View();
         }
 
@@ -68,18 +72,17 @@ namespace FitnessApp.Controllers
         }
 
         // GET: Trainers/Edit/5
+        // GET: Trainers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var trainer = await _context.Trainers.FindAsync(id);
-            if (trainer == null)
-            {
-                return NotFound();
-            }
+            if (trainer == null) return NotFound();
+
+            // Dropdown'ı doldur ve hocanın mevcut uzmanlığını seçili yap
+            ViewData["Hizmetler"] = new SelectList(_context.Services, "Isim", "Isim", trainer.UzmanlikAlani);
+
             return View(trainer);
         }
 

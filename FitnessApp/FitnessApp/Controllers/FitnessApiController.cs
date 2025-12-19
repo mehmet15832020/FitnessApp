@@ -48,5 +48,39 @@ namespace FitnessApp.Controllers
         {
             return await _context.Services.ToListAsync();
         }
+
+        // --- YENİ EKLENEN: DASHBOARD İSTATİSTİKLERİ ---
+        [HttpGet("Stats")]
+        public IActionResult GetDashboardStats()
+        {
+            // 1. Toplam Eğitmen Sayısı (Basit Count)
+            var totalTrainers = _context.Trainers.Count();
+
+            // 2. Toplam Randevu Sayısı
+            var totalAppointments = _context.Appointments.Count();
+
+            // 3. Toplam Beklenen Kazanç (SUM - Toplama İşlemi)
+            // Randevuların hizmetlerine gidip ücretlerini topluyoruz.
+            var totalRevenue = _context.Appointments
+                .Include(a => a.Service)
+                .Sum(a => a.Service.Ucret);
+
+            // 4. En Popüler Hizmet (GROUP BY - Gruplama ve Sıralama)
+            // Randevuları hizmet ismine göre grupla -> Sayılarını bul -> Çoktan aza sırala -> İlkini al
+            var mostPopularService = _context.Appointments
+                .Include(a => a.Service)
+                .GroupBy(a => a.Service.Isim)
+                .Select(g => new { HizmetAdi = g.Key, Sayi = g.Count() })
+                .OrderByDescending(x => x.Sayi)
+                .FirstOrDefault();
+
+            return Ok(new
+            {
+                Trainers = totalTrainers,
+                Appointments = totalAppointments,
+                Revenue = totalRevenue,
+                PopularService = mostPopularService?.HizmetAdi ?? "Henüz Yok" // Veri yoksa hata vermesin
+            });
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace FitnessApp.Web.Services
     public class GeminiService
     {
         // ⚠️ BURAYA KENDİ API ANAHTARINI YAPIŞTIR
-        private readonly string _apiKey = "AIzaSyAOxbnH4sEfnw7j-oYxYlv7RdXNByjtVig";
+        private readonly string _apiKey = "AIzaSyDL7CDpXO1Vp_9Pa-t_sP0NHiyDo-6Qwds";
 
         // GÜNCELLENDİ: Listede gördüğümüz çalışan model (Gemini 2.0 Flash)
         // Listende 'gemini-flash-latest' olarak geçen ücretsiz model

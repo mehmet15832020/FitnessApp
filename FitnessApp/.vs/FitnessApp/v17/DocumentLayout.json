@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|c:\\users\\mehmet\\source\\repos\\fitnessapp\\fitnessapp\\fitnessapp\\views\\services\\geminiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\views\\services\\geminiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|c:\\users\\mehmet\\source\\repos\\fitnessapp\\fitnessapp\\fitnessapp\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|c:\\users\\mehmet\\source\\repos\\fitnessapp\\fitnessapp\\fitnessapp\\controllers\\fitnessapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\controllers\\fitnessapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|c:\\users\\mehmet\\source\\repos\\fitnessapp\\fitnessapp\\fitnessapp\\views\\services\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\views\\services\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|c:\\users\\mehmet\\source\\repos\\fitnessapp\\fitnessapp\\fitnessapp\\views\\services\\geminiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\views\\services\\geminiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|c:\\users\\mehmet\\source\\repos\\fitnessapp\\fitnessapp\\fitnessapp\\controllers\\fitnessapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\controllers\\fitnessapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|c:\\users\\mehmet\\source\\repos\\fitnessapp\\fitnessapp\\fitnessapp\\controllers\\aicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -57,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|c:\\users\\mehmet\\source\\repos\\fitnessapp\\fitnessapp\\fitnessapp\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|c:\\users\\mehmet\\source\\repos\\fitnessapp\\fitnessapp\\fitnessapp\\views\\services\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|solutionrelative:fitnessapp\\views\\services\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4F01A0E8-C75C-491C-905F-CC5EAA7DDB68}|FitnessApp\\FitnessApp.csproj|c:\\users\\mehmet\\source\\repos\\fitnessapp\\fitnessapp\\fitnessapp\\migrations\\20251214123157_addservicedetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -142,23 +142,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Services\\Edit.cshtml",
-              "RelativeDocumentMoniker": "FitnessApp\\Views\\Services\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Services\\Edit.cshtml",
-              "RelativeToolTip": "FitnessApp\\Views\\Services\\Edit.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-14T12:33:40.558Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "FitnessApp\\Views\\Home\\Index.cshtml",
@@ -170,7 +158,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Appointments\\Create.cshtml",
               "RelativeDocumentMoniker": "FitnessApp\\Views\\Appointments\\Create.cshtml",
@@ -182,13 +170,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "GeminiService.cs",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Services\\GeminiService.cs",
               "RelativeDocumentMoniker": "FitnessApp\\Views\\Services\\GeminiService.cs",
               "ToolTip": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Services\\GeminiService.cs",
               "RelativeToolTip": "FitnessApp\\Views\\Services\\GeminiService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-13T16:56:45.96Z",
               "EditorCaption": ""
@@ -196,32 +184,43 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FitnessApiController.cs",
-              "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Controllers\\FitnessApiController.cs",
-              "RelativeDocumentMoniker": "FitnessApp\\Controllers\\FitnessApiController.cs",
-              "ToolTip": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Controllers\\FitnessApiController.cs",
-              "RelativeToolTip": "FitnessApp\\Controllers\\FitnessApiController.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAIwFMAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T16:33:42.047Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Admin\\Index.cshtml",
               "RelativeDocumentMoniker": "FitnessApp\\Views\\Admin\\Index.cshtml",
               "ToolTip": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Admin\\Index.cshtml",
               "RelativeToolTip": "FitnessApp\\Views\\Admin\\Index.cshtml",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAIwGIAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-12-12T12:35:14.316Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Services\\Edit.cshtml",
+              "RelativeDocumentMoniker": "FitnessApp\\Views\\Services\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Services\\Edit.cshtml",
+              "RelativeToolTip": "FitnessApp\\Views\\Services\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-14T12:33:40.558Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "FitnessApiController.cs",
+              "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Controllers\\FitnessApiController.cs",
+              "RelativeDocumentMoniker": "FitnessApp\\Controllers\\FitnessApiController.cs",
+              "ToolTip": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Controllers\\FitnessApiController.cs",
+              "RelativeToolTip": "FitnessApp\\Controllers\\FitnessApiController.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAIwFQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T16:33:42.047Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "AiController.cs",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Controllers\\AiController.cs",
               "RelativeDocumentMoniker": "FitnessApp\\Controllers\\AiController.cs",
@@ -233,7 +232,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Login.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
               "RelativeDocumentMoniker": "FitnessApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
@@ -245,7 +244,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "EmailSender.cs",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Services\\EmailSender.cs",
               "RelativeDocumentMoniker": "FitnessApp\\Services\\EmailSender.cs",
@@ -269,7 +268,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Service.cs",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Models\\Service.cs",
               "RelativeDocumentMoniker": "FitnessApp\\Models\\Service.cs",
@@ -281,7 +280,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Trainers\\Create.cshtml",
               "RelativeDocumentMoniker": "FitnessApp\\Views\\Trainers\\Create.cshtml",
@@ -293,7 +292,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Trainers\\Edit.cshtml",
               "RelativeDocumentMoniker": "FitnessApp\\Views\\Trainers\\Edit.cshtml",
@@ -305,7 +304,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "AppointmentsController.cs",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Controllers\\AppointmentsController.cs",
               "RelativeDocumentMoniker": "FitnessApp\\Controllers\\AppointmentsController.cs",
@@ -317,7 +316,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Views\\Services\\Create.cshtml",
               "RelativeDocumentMoniker": "FitnessApp\\Views\\Services\\Create.cshtml",
@@ -329,7 +328,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "TrainersController.cs",
               "DocumentMoniker": "C:\\Users\\Mehmet\\source\\repos\\FitnessApp\\FitnessApp\\FitnessApp\\Controllers\\TrainersController.cs",
               "RelativeDocumentMoniker": "FitnessApp\\Controllers\\TrainersController.cs",

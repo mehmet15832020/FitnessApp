@@ -42,31 +42,32 @@ namespace FitnessApp.Controllers
             return trainers;
         }
 
-        // 3. TÜM HİZMETLERİ GETİRME (GET: api/FitnessApi/Services)
-        [HttpGet("Services")]
-        public async Task<ActionResult<IEnumerable<Service>>> GetServices()
-        {
-            return await _context.Services.ToListAsync();
-        }
-
-        // --- YENİ EKLENEN: DASHBOARD İSTATİSTİKLERİ ---
         [HttpGet("Stats")]
         public IActionResult GetDashboardStats()
         {
-            // 1. Toplam Eğitmen Sayısı (Basit Count)
-            var totalTrainers = _context.Trainers.Count();
+            // Şu anki zaman bilgileri
+            var today = DateTime.Now;
+            var currentMonth = today.Month;
+            var currentYear = today.Year;
 
-            // 2. Toplam Randevu Sayısı
-            var totalAppointments = _context.Appointments.Count();
-
-            // 3. Toplam Beklenen Kazanç (SUM - Toplama İşlemi)
-            // Randevuların hizmetlerine gidip ücretlerini topluyoruz.
-            var totalRevenue = _context.Appointments
+            // 1. TOPLAM CİRO (Sadece BU AY ve ONAYLANMIŞ olanlar)
+            // Mantık: Tarihi bu ayın içinde olan VE Durumu "Onaylandı" olanların ücretini topla.
+            var monthlyRevenue = _context.Appointments
                 .Include(a => a.Service)
+                .Where(a => a.Tarih.Month == currentMonth &&
+                            a.Tarih.Year == currentYear &&
+                            a.Durum == "Onaylandı")
                 .Sum(a => a.Service.Ucret);
 
-            // 4. En Popüler Hizmet (GROUP BY - Gruplama ve Sıralama)
-            // Randevuları hizmet ismine göre grupla -> Sayılarını bul -> Çoktan aza sırala -> İlkini al
+            // 2. BEKLEYEN RANDEVULAR (Adminin onaylaması gerekenler)
+            // Bu veri admin için paradan daha önemlidir, iş yükünü gösterir.
+            var pendingAppointments = _context.Appointments
+                .Count(a => a.Durum == "Onay Bekliyor");
+
+            // 3. TOPLAM EĞİTMEN SAYISI
+            var totalTrainers = _context.Trainers.Count();
+
+            // 4. EN POPÜLER HİZMET (Tüm zamanların)
             var mostPopularService = _context.Appointments
                 .Include(a => a.Service)
                 .GroupBy(a => a.Service.Isim)
@@ -77,9 +78,9 @@ namespace FitnessApp.Controllers
             return Ok(new
             {
                 Trainers = totalTrainers,
-                Appointments = totalAppointments,
-                Revenue = totalRevenue,
-                PopularService = mostPopularService?.HizmetAdi ?? "Henüz Yok" // Veri yoksa hata vermesin
+                PendingCount = pendingAppointments, // Değişti: Toplam randevu yerine Bekleyenler
+                Revenue = monthlyRevenue,           // Değişti: Sadece bu ayın cirosu
+                PopularService = mostPopularService?.HizmetAdi ?? "Yok"
             });
         }
     }
